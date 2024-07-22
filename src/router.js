@@ -9,8 +9,8 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Layout />,
         children: [
-            {
-                path: "products",
+            {       
+                path: "/products",
                 element: <ProductPage />,
             },
             {
