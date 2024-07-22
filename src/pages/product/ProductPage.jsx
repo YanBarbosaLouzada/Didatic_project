@@ -1,61 +1,54 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AddButton from "../../components/ui/addbutton/AddButton";
 import Modal from "../../components/modal/Modal";
-import { useState } from "react";
 import axios from "axios";
 import Product from "../../components/product/Product";
+
 function Products() {
     const [showModal, setShowModal] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
     const [products, setProducts] = useState([]);
+
     const pegarTodasAsProductsDaApi = () => {
         axios
-            .get("https://web-intermediary-frontend.onrender.com/products")
+            .get("https://web-intermediary-frontend.onrender.com/api/products")
             .then((res) => {
-                // console.log(res)
-                // console.log(res.data)
                 setProducts(res.data.products);
             })
-            .catch((err) => console.log("erro ao pegar os dados da api", err));
+            .catch((err) => console.log("Erro ao pegar os dados da API", err));
     };
+
     const createProduct = async (name, description, quantity) => {
         await axios
-            .post("https://web-intermediary-frontend.onrender.com/products/create-product", {
+            .post("https://web-intermediary-frontend.onrender.com/api/products/create-product", {
                 name,
                 description,
                 quantity,
             })
             .then((res) => {
-                // console.log(res)
-                // console.log(res.data)
                 setProducts([...products, res.data.data]);
-                // pegarTodasAsProductsDaApi()
             })
-            .catch((err) => console.log("erro ao pegar os dados da api", err));
+            .catch((err) => console.log("Erro ao criar o produto", err));
     };
+
     const deleteProduct = async (id) => {
         await axios
-            .delete(`https://web-intermediary-frontend.onrender.com/products/delete-product/${id}`)
+            .delete(`https://web-intermediary-frontend.onrender.com/api/products/${id}`)
             .then((res) => {
-                // console.log(res)
-                // console.log(res.data)
                 setProducts(products.filter((n) => n._id !== id));
-                // pegarTodasAsProductsDaApi()
             })
-            .catch((err) => console.log("erro ao pegar os dados da api", err));
+            .catch((err) => console.log("Erro ao deletar o produto", err));
     };
 
     const editProduct = (name, description, quantity, id) => {
         axios
-            .put(`https://web-intermediary-frontend.onrender.com/products/edit-product`, {
+            .put(`https://web-intermediary-frontend.onrender.com/api/products`, {
                 name,
                 description,
                 quantity,
                 _id: id,
             })
             .then((res) => {
-                // console.log(res)
-                // console.log(res.data)
                 let newUpdatedProducts = products.map((n) => {
                     if (n._id === id) {
                         return res.data.updatedProduct;
@@ -64,23 +57,17 @@ function Products() {
                 });
                 setProducts(newUpdatedProducts);
             })
-            .catch((err) => console.log("erro ao pegar os dados da api", err));
+            .catch((err) => console.log("Erro ao editar o produto", err));
     };
 
     useEffect(() => {
         pegarTodasAsProductsDaApi();
-        // editProduct(1,"batatadoce","editado")
     }, []);
+
     const mudarModal = () => {
         setShowModal((state) => !state);
     };
 
-    // function fecharOModal(){
-    //   setShowModal(false)
-    // }
-    // function abrirOModal(){
-    //   setShowModal(true)
-    // }
     return (
         <div>
             <AddButton abrirOModal={mudarModal} />
@@ -97,6 +84,7 @@ function Products() {
             <div className="Productslist">
                 {products.map((n) => (
                     <Product
+                        key={n._id}
                         {...n}
                         deleteProduct={deleteProduct}
                         editProduct={editProduct}
