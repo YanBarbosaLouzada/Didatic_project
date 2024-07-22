@@ -10,7 +10,7 @@ function Products() {
     const [products, setProducts] = useState([]);
     const pegarTodasAsProductsDaApi = () => {
         axios
-            .get("http://localhost:4000/products")
+            .get("https://web-intermediary-frontend.onrender.com/products")
             .then((res) => {
                 // console.log(res)
                 // console.log(res.data)
@@ -20,7 +20,7 @@ function Products() {
     };
     const createProduct = async (name, description, quantity) => {
         await axios
-            .post("http://localhost:4000/products/create-product", {
+            .post("https://web-intermediary-frontend.onrender.com/products/create-product", {
                 name,
                 description,
                 quantity,
@@ -35,7 +35,7 @@ function Products() {
     };
     const deleteProduct = async (id) => {
         await axios
-            .delete(`http://localhost:4000/products/delete-product/${id}`)
+            .delete(`https://web-intermediary-frontend.onrender.com/products/delete-product/${id}`)
             .then((res) => {
                 // console.log(res)
                 // console.log(res.data)
@@ -47,7 +47,7 @@ function Products() {
 
     const editProduct = (name, description, quantity, id) => {
         axios
-            .put(`http://localhost:4000/products/edit-product`, {
+            .put(`https://web-intermediary-frontend.onrender.com/products/edit-product`, {
                 name,
                 description,
                 quantity,
