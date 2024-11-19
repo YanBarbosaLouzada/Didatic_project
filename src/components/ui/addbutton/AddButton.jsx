@@ -9,7 +9,7 @@ function AddButton(props) {
             onClick={() => props.abrirOModal()}
             className={`${mouse ? "addNewButton" : "addNewButton-mouse"}`}
         >
-            {mouse ? "+" : "Adicionar um produto"}
+            {mouse ? "+" : props.texto}
         </div>
     );
 }

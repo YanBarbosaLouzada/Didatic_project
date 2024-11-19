@@ -19,7 +19,7 @@ function Form(props) {
             setDescription(props.editingProduct.description);
             setQuantity(props.editingProduct.quantity);
         }
-    }, []);
+    }, [props.editingProduct]);
     return (
         <form onSubmit={CadastrarProduct} className={"form"}>
             <h1>{props.editingProduct ? "Editar" : "Adicionar"} Produto</h1>

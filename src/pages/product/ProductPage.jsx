@@ -72,21 +72,15 @@ function Products() {
 
     useEffect(() => {
         pegarTodasAsProductsDaApi();
-        // editProduct(1,"batatadoce","editado")
     }, []);
     const mudarModal = () => {
         setShowModal((state) => !state);
     };
 
-    // function fecharOModal(){
-    //   setShowModal(false)
-    // }
-    // function abrirOModal(){
-    //   setShowModal(true)
-    // }
     return (
         <div>
-            <AddButton abrirOModal={mudarModal} />
+            <AddButton abrirOModal={mudarModal} texto="adicionar um produtudo"/>
+
             {showModal ? (
                 <Modal createProduct={createProduct} fecharOModal={mudarModal} />
             ) : null}
@@ -97,6 +91,7 @@ function Products() {
                     fecharOModal={() => setEditingProduct(null)}
                 />
             ) : null}
+
             <div className="Productslist">
                 {products.map((n) => (
                     <Product
