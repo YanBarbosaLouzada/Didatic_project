@@ -10,7 +10,7 @@ function Products() {
     const [products, setProducts] = useState([]);
     const pegarTodasAsProductsDaApi = () => {
         axios
-            .get("https://web-intermediary-backend.onrender.com/products")
+            .get("http://localhost:4444/products/")
             .then((res) => {
                 // console.log(res)
                 // console.log(res.data)
@@ -20,45 +20,37 @@ function Products() {
     };
     const createProduct = async (name, description, quantity) => {
         await axios
-            .post("https://web-intermediary-backend.onrender.com/products/create-product", {
+            .post("http://localhost:4444/products/create-product", {
                 name,
                 description,
                 quantity,
             })
             .then((res) => {
-                // console.log(res)
-                // console.log(res.data)
-
                 setProducts([...products, res.data.data]);
-                // pegarTodasAsProductsDaApi()
+
             })
             .catch((err) => console.log("erro ao pegar os dados da api", err));
     };
     const deleteProduct = async (id) => {
         await axios
             .delete(
-                `https://web-intermediary-backend.onrender.com/products/delete-product/${id}`
+                `http://localhost:4444/products/delete-product/${id}`
             )
             .then((res) => {
-                // console.log(res)
-                // console.log(res.data)
                 setProducts(products.filter((n) => n._id !== id));
-                // pegarTodasAsProductsDaApi()
             })
             .catch((err) => console.log("erro ao pegar os dados da api", err));
     };
 
     const editProduct = (name, description, quantity, id) => {
         axios
-            .put(`https://web-intermediary-backend.onrender.com/products/edit-product`, {
+            .put(`http://localhost:4444/products/edit-product`, {
                 name,
                 description,
                 quantity,
                 _id: id,
             })
             .then((res) => {
-                // console.log(res)
-                // console.log(res.data)
                 let newUpdatedProducts = products.map((n) => {
                     if (n._id === id) {
                         return res.data.updatedProduct;
@@ -79,7 +71,7 @@ function Products() {
 
     return (
         <div>
-            <AddButton abrirOModal={mudarModal} texto="adicionar um produtudo"/>
+            <AddButton abrirOModal={mudarModal} texto="adicionar um produtudo" />
 
             {showModal ? (
                 <Modal createProduct={createProduct} fecharOModal={mudarModal} />

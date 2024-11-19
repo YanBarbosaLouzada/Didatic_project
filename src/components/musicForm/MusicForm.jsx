@@ -34,8 +34,9 @@ function MusicForm(props) {
                     placeholder="Qual o nome da sua musica"
                     name="nome"
                     id="nome"
-                    onChange={(e) => setNome(e.target.value)}
                     value={nome}
+                    onChange={(e) => setNome(e.target.value)}
+                    
                 />
                 <label htmlFor="genero">Genero</label>
                 <input
@@ -49,7 +50,7 @@ function MusicForm(props) {
                 <label htmlFor="cantor">Cantor</label>
                 <input
                     type="text"
-                    placeholder="Quem e o cantor da sua musica?"
+                    placeholder="Quem é o cantor da sua musica?"
                     name="cantor"
                     id="cantor"
                     value={cantor}
@@ -57,7 +58,7 @@ function MusicForm(props) {
                 />
                 <label htmlFor="nota">Nota</label>
                 <input type="number"
-                    placeholder='Qual a nota desta musica?'
+                    placeholder='Qual é a nota desta musica?'
                     name='nota'
                     id='nota'
                     value={nota}
