@@ -13,7 +13,7 @@ function MusicForm(props) {
             id = props.editingMusic.id;
         }
         props.createMusic({ nome, genero, cantor, nota, id })
-        propsfecharOModal();
+        props.fecharOModal();
     };
     useEffect(() => {
         if (props.editingMusic) {

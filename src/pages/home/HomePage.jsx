@@ -1,11 +1,12 @@
-import React from 'react'
-import './HomePage.css'
+import React from 'react';
+import './HomePage.css';
+
 function HomePage() {
     return (
-        <div >
-            HOMEZADA
+        <div className="home-page">
+           
         </div>
-    )
+    );
 }
 
-export default HomePage
+export default HomePage;

@@ -41,7 +41,6 @@ function Products() {
             })
             .catch((err) => console.log("erro ao pegar os dados da api", err));
     };
-
     const editProduct = (name, description, quantity, id) => {
         axios
             .put(`http://localhost:4444/products/edit-product`, {

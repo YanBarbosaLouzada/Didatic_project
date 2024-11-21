@@ -1,9 +1,9 @@
 import React from 'react'
-import { AiFillDelete, AiTwotoneApi, AiTwotoneEdit } from 'react-icons/ai';
+import { AiFillDelete, AiTwotoneEdit } from 'react-icons/ai';
 import "./MusicCard.css";
-import { AiTwotoneEdit, AiFillDelete } from 'react-icons/ai';
-function MusicCard({ music, setEditMode, deleteMusic }) {
-    const { nome, genero, cantor, nota, id } = music;
+
+function MusicCard({ musica, setEditMode, deleteMusic }) {
+    const { nome, genero, cantor, nota, id } = musica;
     return (
         <div id='card' className='music-card'>
             <h1>{nome}</h1>
@@ -14,7 +14,7 @@ function MusicCard({ music, setEditMode, deleteMusic }) {
                 <AiTwotoneEdit
                     color='yellow'
                     width={32}
-                    onClick={() => setEditMode(music)}
+                    onClick={() => setEditMode(musica)}
                 />
                 <AiFillDelete
                     color='red'
