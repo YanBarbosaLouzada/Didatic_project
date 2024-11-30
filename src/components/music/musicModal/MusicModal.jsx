@@ -1,5 +1,5 @@
 import React from "react";
-import "../modal/Modal.css";
+import "../../modal/Modal.css";
 import { AiFillCloseCircle } from "react-icons/ai";
 import MusicForm from "../musicForm/MusicForm";
 

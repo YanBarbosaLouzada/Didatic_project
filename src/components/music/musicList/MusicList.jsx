@@ -1,12 +1,13 @@
-import React from 'react'
-import MusicCard from '../musicCard/MusicCard'
+import React from 'react';
+import MusicCard from '../musicCard/MusicCard';
+import './MusicList.css';
 
 function MusicList({ musicas, setEditMode, deleteMusica }) {
-    return (    
+    return (
         <div id="musicas-list">
             {musicas.map((musica) => (
                 <MusicCard
-                    anime={musica}
+                    musica={musica}
                     key={musica.id}
                     setEditMode={setEditMode}
                     deleteMusica={deleteMusica}
@@ -17,3 +18,5 @@ function MusicList({ musicas, setEditMode, deleteMusica }) {
 }
 
 export default MusicList;
+
+

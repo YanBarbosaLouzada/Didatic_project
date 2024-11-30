@@ -3,22 +3,40 @@ import RegisterForm from "../../components/authComponents/Register";
 import LoginForm from "../../components/authComponents/Login";
 import "./AuthPage.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 function AuthPage() {
-    const [registerPage, setRegisterPage] = useState(true);
+    const [registerPage, setRegisterPage] = useState(false);
+    const navigate = useNavigate();
 
     const registerHook = async (data) => {
-        const response = await axios.post("https://web-intermediary-frontend.onrender.com/auth/register",data);
-        if (response.status === 200) {
-            console.log("registrou");
+        try {
+            const response = await axios.post("http://localhost:4444/auth/register", data);
+            if (response.status === 201) {
+                setRegisterPage((registerPage) => !registerPage);
+                console.log("Registrado com sucesso");
+            }
+        } catch (error) {
+            console.error("Erro ao registrar:", error);
+            alert("Erro ao registrar. Tente novamente.");
         }
     };
 
     const loginHook = async (data) => {
-        const response = await axios.post("https://web-intermediary-frontend.onrender.com/auth/login", data);
-        if (response.status === 200) {
-            console.log("logou", response.data.token);
+        try {
+            const response = await axios.post("http://localhost:4444/auth/login",data,
+                { withCredentials: true } // Faz com que o cookie seja enviado automaticamente
+            );
+            if (response.status === 200) {
+                console.log("Logado com sucesso");
+                navigate("/"); 
+            }
+        } catch (error) {
+            console.error("Erro ao fazer login:", error);
+            alert("Erro ao fazer login. Verifique suas credenciais.");
         }
     };
+
     return (
         <div id="auth-page">
             {registerPage ? (
