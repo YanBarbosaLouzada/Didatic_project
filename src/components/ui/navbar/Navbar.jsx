@@ -1,26 +1,35 @@
+import React, { useContext, useEffect,useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
 import "./Navbar.css";
-import axios from "axios";
 
 function Navbar() {
-    const handleLogout = async () => {
-        try {
-            await axios.post('http://localhost:4444/auth/logout', {}, { withCredentials: true });
-            alert('Logout realizado com sucesso!');
-        } catch (error) {
-            console.error('Erro ao realizar logout:', error);
-        }
-    };
+    const { isAuthenticated, logout, checkAdmin } = useContext(AuthContext);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        // Verifica se o usuário é admin ao montar o componente
+        const verifyAdmin = async () => {
+            const isAdminUser = await checkAdmin();
+            setIsAdmin(isAdminUser);
+        };
+        verifyAdmin();
+    }, [checkAdmin]);
 
     return (
-        
         <nav>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/products">Produtos</NavLink>
             <NavLink to="/auth">Sessão</NavLink>
-            <NavLink to="/musicas">Musicas</NavLink>
-            <button onClick={handleLogout}>Sair</button>
-            
+            <NavLink to="/pokemons">Pokemons</NavLink>
+            {isAdmin && <NavLink to="/musicas">Músicas</NavLink>}
+            {isAuthenticated ? (
+                <>
+                    <a onClick={logout} style={{ cursor: "pointer" }}>Sair</a>
+                </>
+            ) : (
+                <NavLink to="/auth">Entrar</NavLink>
+            )}
         </nav>
     );
 }

@@ -4,15 +4,16 @@ import ProductPage from "./pages/product/ProductPage";
 import HomePage from "./pages/home/HomePage";
 import AuthPage from "./pages/authPage/AuthPage";
 import MusicPage from "./pages/musicPage/MusicPage";
+import ProtectedRoute from "./hooks/auth/ProtectedRoute";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
         children: [
-            {       
+            {
                 path: "/products",
-                element: <ProductPage />,
+                element: <ProtectedRoute> <ProductPage /> </ProtectedRoute>,
             },
             {
                 path: "ex",
@@ -23,12 +24,12 @@ export const router = createBrowserRouter([
                 element: <HomePage />,
             },
             {
-                path: "/auth", 
+                path: "/auth",
                 element: <AuthPage />
             },
             {
                 path: "/musicas",
-                element: <MusicPage/>
+                element: <MusicPage />
             }
         ],
     },
