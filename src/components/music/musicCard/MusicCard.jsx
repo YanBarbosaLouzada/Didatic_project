@@ -7,21 +7,23 @@ function MusicCard({ musica, setEditMode, deleteMusica }) {
 
     return (
         <div className="music-card">
-            <h2>{nome}</h2>
-            <div> <b>Gênero :</b> {genero}</div>
-            <div> <b>Cantor :</b> {cantor} </div>
-            <div> <b>Nota:</b> {nota}</div>
-            <div className="icons">
-                <AiTwotoneEdit
-                    color="yellow"
-                    size={32}
-                    onClick={() => setEditMode(musica)}
-                />
-                <AiFillDelete
-                    color="red"
-                    size={32}
-                    onClick={() => deleteMusica(id)}
-                />
+            <div className="music-header">
+                <h2>{nome}</h2>
+                <div className="icons">
+                    <AiTwotoneEdit
+                        className="icon edit-icon"
+                        onClick={() => setEditMode(musica)}
+                    />
+                    <AiFillDelete
+                        className="icon delete-icon"
+                        onClick={() => deleteMusica(id)}
+                    />
+                </div>
+            </div>
+            <div className="music-details">
+                <p><strong>Gênero:</strong> {genero}</p>
+                <p><strong>Cantor:</strong> {cantor}</p>
+                <p><strong>Nota:</strong> {nota}</p>
             </div>
         </div>
     );

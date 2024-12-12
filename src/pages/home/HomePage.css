@@ -1,0 +1,103 @@
+
+/* Container principal */
+.home-page {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Cabeçalho da página */
+.home-header {
+    margin-bottom: 40px;
+}
+
+.home-header h1 {
+    font-size: 36px;
+    color: #4a90e2;
+    /* Azul escuro */
+    margin-bottom: 10px;
+}
+
+.home-header p {
+    font-size: 18px;
+    color: #555;
+    /* Texto secundário */
+}
+
+/* Conteúdo principal */
+.home-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Estilo dos cards */
+.card {
+    background-color: #fff;
+    /* Fundo branco */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra leve */
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    /* Leve aumento no hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    /* Sombra mais intensa */
+}
+
+.card h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+.card p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Botões */
+button {
+    background-color: #4a90e2;
+    /* Azul escuro */
+    color: #fff;
+    /* Texto branco */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #357ABD;
+    /* Azul mais escuro */
+    transform: scale(1.1);
+    /* Leve aumento no hover */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .home-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .card {
+        width: 90%;
+        /* Ajusta o tamanho do card em telas menores */
+    }
+}

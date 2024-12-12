@@ -3,93 +3,103 @@ import AddButton from "../../components/ui/addbutton/AddButton";
 import Modal from "../../components/modal/Modal";
 import axios from "axios";
 import Product from "../../components/product/Product";
+import './ProductPage.css'
 
 function Products() {
     const [showModal, setShowModal] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
     const [products, setProducts] = useState([]);
-    const pegarTodasAsProductsDaApi = () => {
-        axios
-            .get("http://localhost:4444/products/")
-            .then((res) => {
-                // console.log(res)
-                // console.log(res.data)
-                setProducts(res.data.products);
-            })
-            .catch((err) => console.log("erro ao pegar os dados da api", err));
-    };
-    const createProduct = async (name, description, quantity) => {
-        await axios
-            .post("http://localhost:4444/products/create-product", {
-                name,
-                description,
-                quantity,
-            })
-            .then((res) => {
-                setProducts([...products, res.data.data]);
 
-            })
-            .catch((err) => console.log("erro ao pegar os dados da api", err));
+    // Função para pegar todos os produtos da API
+    const pegarTodasAsProductsDaApi = async () => {
+        try {
+            const response = await axios.get("http://localhost:4444/products/",);
+            setProducts(response.data.products);
+        } catch (err) {
+            console.error("Erro ao pegar os dados da API", err);
+        }
     };
+
+    // Função para criar um novo produto
+    const createProduct = async (name, description, quantity) => {
+        try {
+            const response = await axios.post(
+                "http://localhost:4444/products/create-product",
+                { name, description, quantity },  // Dados do produto
+                { withCredentials: true }  // Configuração do cookie
+            );
+            setProducts((prevProducts) => [...prevProducts, response.data.data]);
+        } catch (err) {
+            console.error("Erro ao criar o produto", err);
+        }
+    };
+
+
+    // Função para deletar um produto
     const deleteProduct = async (id) => {
-        await axios
-            .delete(
-                `http://localhost:4444/products/delete-product/${id}`
-            )
-            .then((res) => {
-                setProducts(products.filter((n) => n._id !== id));
-            })
-            .catch((err) => console.log("erro ao pegar os dados da api", err));
+        try {
+            await axios.delete(`http://localhost:4444/products/delete-product/${id}`, { withCredentials: true });
+            setProducts((prevProducts) => prevProducts.filter((product) => product._id !== id));
+        } catch (err) {
+            console.error("Erro ao deletar o produto", err);
+        }
     };
-    const editProduct = (name, description, quantity, id) => {
-        axios
-            .put(`http://localhost:4444/products/edit-product`, {
+
+    // Função para editar um produto
+    const editProduct = async (name, description, quantity, id) => {
+        try {
+            const response = await axios.put("http://localhost:4444/products/edit-product", {
                 name,
                 description,
                 quantity,
                 _id: id,
-            })
-            .then((res) => {
-                let newUpdatedProducts = products.map((n) => {
-                    if (n._id === id) {
-                        return res.data.updatedProduct;
-                    }
-                    return n;
-                });
-                setProducts(newUpdatedProducts);
-            })
-            .catch((err) => console.log("erro ao pegar os dados da api", err));
+            },
+                { withCredentials: true });
+            setProducts((prevProducts) =>
+                prevProducts.map((product) =>
+                    product._id === id ? response.data.updatedProduct : product
+                )
+            );
+        } catch (err) {
+            console.error("Erro ao editar o produto", err);
+        }
     };
 
     useEffect(() => {
         pegarTodasAsProductsDaApi();
     }, []);
+
     const mudarModal = () => {
         setShowModal((state) => !state);
     };
 
     return (
         <div>
-            <AddButton abrirOModal={mudarModal} texto="adicionar um produtudo" />
+            <AddButton abrirOModal={mudarModal} texto="Adicionar um produto" />
 
-            {showModal ? (
-                <Modal createProduct={createProduct} fecharOModal={mudarModal} />
-            ) : null}
-            {editingProduct ? (
+            {showModal && (
+                <Modal
+                    createProduct={createProduct}
+                    fecharOModal={mudarModal}
+                />
+            )}
+
+            {editingProduct && (
                 <Modal
                     createProduct={editProduct}
                     editingProduct={editingProduct}
                     fecharOModal={() => setEditingProduct(null)}
                 />
-            ) : null}
+            )}
 
-            <div className="Productslist">
-                {products.map((n) => (
+            <div id="productslist">
+                {products.map((product) => (
                     <Product
-                        {...n}
+                        key={product._id} // Chave única
+                        {...product}
                         deleteProduct={deleteProduct}
                         editProduct={editProduct}
-                        setEditMode={(data) => setEditingProduct(data)}
+                        setEditMode={(productData) => setEditingProduct(productData)}
                     />
                 ))}
             </div>

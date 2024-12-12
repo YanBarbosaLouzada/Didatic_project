@@ -6,15 +6,40 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.9);
-    padding: 50px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    padding: 20px;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .closeModal {
-    width: 90%;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 50px;
+    position: absolute;
+    top: 20px;
+    right: 100px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.closeModal:hover {
+    color: #f24be7;
+    transform: scale(1.1);
+
+}
+
+/* Animação para o modal aparecer suavemente */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
