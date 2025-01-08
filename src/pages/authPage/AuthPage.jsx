@@ -6,7 +6,7 @@ import "./AuthPage.css";
 
 function AuthPage() {
     const [registerPage, setRegisterPage] = useState(false);
-    const { login, register } = useContext(AuthContext); 
+    const { login, register } = useContext(AuthContext);
 
 
     return (

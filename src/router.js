@@ -5,6 +5,7 @@ import HomePage from "./pages/home/HomePage";
 import AuthPage from "./pages/authPage/AuthPage";
 import MusicPage from "./pages/musicPage/MusicPage";
 import ProtectedRoute from "./hooks/auth/ProtectedRoute";
+import PokemonPage from "./pages/pokemonPage/PokemonPage.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: "/musicas",
                 element: <MusicPage />
+            },
+            {
+                path: "/pokemons",
+                element: <PokemonPage />
             }
         ],
     },

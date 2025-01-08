@@ -7,14 +7,14 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false); // Indica se o usuário está autenticado
     const [loading, setLoading] = useState(true); // Para controlar o carregamento inicial
 
-    
+
 
     useEffect(() => {
         const checkLogin = async () => {
             try {
                 const response = await axios.get("http://localhost:4444/auth/check", { withCredentials: true });
                 if (response.status === 200) {
-                    setUser(response.data.user); 
+                    setUser(response.data.user);
                     setIsAuthenticated(true);
                 } else {
                     setUser(null);
@@ -40,9 +40,9 @@ export const AuthProvider = ({ children }) => {
             if (response.status === 200 && response.data.role === "admin") {
                 setUser({ ...response.data });
                 setIsAuthenticated(true);
-                return true; 
+                return true;
             } else {
-                return false; 
+                return false;
             }
         } catch (error) {
             console.error("Erro ao verificar autenticação admin:", error);
@@ -75,7 +75,11 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (data) => {
         try {
-            const response = await axios.post("http://localhost:4444/auth/register", data);
+            const response = await axios.post(
+                "http://localhost:4444/auth/register",
+                data,
+                { withCredentials: true }
+            );
             if (response.status === 201) {
                 alert("Registrado com sucesso!");
             }
@@ -84,6 +88,7 @@ export const AuthProvider = ({ children }) => {
             alert("Erro ao registrar. Tente novamente.");
         }
     };
+
 
     return (
         <AuthContext.Provider value={{ user, isAuthenticated, loading, login, logout, checkAdmin, register }}>

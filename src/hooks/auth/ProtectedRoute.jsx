@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 function ProtectedRoute({ children }) {
     const { isAuthenticated, loading } = useContext(AuthContext);
 
-    if (loading) return <p>Carregando...</p>; // Exibe carregamento inicial
+    if (loading) return <p>Carregando...</p>;
 
     return isAuthenticated ? children : <Navigate to="/auth" />;
 }

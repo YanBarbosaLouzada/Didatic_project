@@ -1,0 +1,124 @@
+/* Fundo escuro para o modal */
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Fundo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Container do modal */
+.modal-container {
+    background: linear-gradient(#f9bc61, #fde8c9);
+    /* Gradiente inspirado no card */
+    border-radius: 20px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2),
+        0px 10px 14px 1px rgba(0, 0, 0, 0.14),
+        0px 4px 18px 3px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+    /* Animação de entrada */
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+/* Animação para suavizar a entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Cabeçalho do modal */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(#fde8c9, #f9bc61);
+    /* Gradiente inverso */
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-header h2 {
+    font-size: 24px;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.close-button {
+    background: none;
+}
+
+/* Corpo do modal */
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Imagem do Pokémon */
+.pokemon-image {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Detalhes do Pokémon */
+.pokemon-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+}
+
+.pokemon-details span {
+    font-weight: normal;
+}
+
+/* Listas de habilidades e tipos */
+.abilities-list,
+.types-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.abilities-list li,
+.types-list li {
+    background: linear-gradient(#f9bc61, #fde8c9);
+    /* Gradiente para os chips */
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    text-transform: capitalize;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
