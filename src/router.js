@@ -6,6 +6,7 @@ import AuthPage from "./pages/authPage/AuthPage";
 import MusicPage from "./pages/musicPage/MusicPage";
 import ProtectedRoute from "./hooks/auth/ProtectedRoute";
 import PokemonPage from "./pages/pokemonPage/PokemonPage.jsx";
+import ChatPage from "./pages/chatpage/ChatPage.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 path: "/pokemons",
                 element: <PokemonPage />
+            },
+            {
+                path: "/chat",
+                element: <ChatPage />
             }
         ],
     },

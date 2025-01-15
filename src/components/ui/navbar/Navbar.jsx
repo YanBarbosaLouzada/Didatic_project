@@ -21,22 +21,7 @@ function Navbar() {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/products">Produtos</NavLink>
             <NavLink to="/pokemons">Pokemons</NavLink>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
+            <NavLink to="/chat">Chat</NavLink>
             {isAdmin && <NavLink to="/musicas">Músicas</NavLink>}
             {isAuthenticated ? (
                 <>

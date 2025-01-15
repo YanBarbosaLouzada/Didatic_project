@@ -1,0 +1,39 @@
+.join-container {
+    background-color: #11224b;
+    width: 328px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    align-items: center;
+}
+
+.join-title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-top: 12px;
+    color: white;
+}
+
+.join-input-container {
+    margin-top: 12px;
+}
+
+.join-input {
+    border-radius: 4px;
+    padding-left: 8px;
+}
+
+.join-button {
+    background-color: #9747ff;
+    width: 120px;
+    height: 30px;
+    border-radius: 12px;
+    margin-top: 12px;
+    color: white;
+    cursor: pointer;
+}
+
+.join-button:hover {
+    background-color: #975ae7;
+}
