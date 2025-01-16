@@ -1,39 +1,72 @@
+/* Fundo da página */
 .join-container {
-    background-color: #11224b;
-    width: 328px;
-    height: 400px;
     display: flex;
     flex-direction: column;
-    border-radius: 12px;
+    justify-content: center;
     align-items: center;
-}
-
-.join-title {
+    height: 30vh;
+    background: #2e2e3a;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
     text-align: center;
-    font-size: 1.8rem;
-    margin-top: 12px;
-    color: white;
+    padding: 20px;
 }
 
+/* Título */
+.join-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Container do input */
 .join-input-container {
-    margin-top: 12px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 400px;
 }
 
+/* Campo de entrada */
 .join-input {
-    border-radius: 4px;
-    padding-left: 8px;
+    width: 50%;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    background-color: #f4f4f4;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+    text-align: center;
 }
 
+.join-input:focus {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 10px #2575fc;
+    background-color: #fff;
+}
+
+/* Botão de entrada */
 .join-button {
-    background-color: #9747ff;
-    width: 120px;
-    height: 30px;
-    border-radius: 12px;
-    margin-top: 12px;
-    color: white;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #2575fc;
+    border: none;
+    border-radius: 25px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .join-button:hover {
-    background-color: #975ae7;
+    background-color: #6a11cb;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 0 10px #6a11cb;
+}
+
+.join-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
