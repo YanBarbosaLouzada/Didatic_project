@@ -24,6 +24,7 @@ function RegisterForm(props) {
                 id="name"
                 onChange={(e) => setUser({ ...user, name: e.target.value })}
                 value={user.name}
+                data-testid="name-input"
             />
             <label htmlFor="email">Email</label>
             <input
@@ -32,6 +33,7 @@ function RegisterForm(props) {
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
                 placeholder="Email..."
                 id="email"
+                data-testid="email-input"
             />
             <label htmlFor="idade">Idade</label>
             <input
@@ -42,6 +44,7 @@ function RegisterForm(props) {
                 }
                 placeholder="Idade"
                 id="idade"
+                data-testid="idade-input"
             />
             <label htmlFor="password">Senha</label>
             <input
@@ -50,6 +53,7 @@ function RegisterForm(props) {
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 placeholder="Senha..."
                 id="password"
+                data-testid="password-input"
             />
             <label htmlFor="confirmPassword">Confirmar Senha</label>
             <input
@@ -60,8 +64,9 @@ function RegisterForm(props) {
                 }
                 placeholder="Confirme sua senha..."
                 id="confirmPassword"
+                data-testid="confirmPassword-input"
             />
-            <button>Registrar</button>
+            <button data-testid="submit-button">Registrar</button>
         </form>
     );
 }

@@ -12,25 +12,27 @@ function LoginForm(props) {
     return (
         <form onSubmit={handleSubmit} className={"form"}>
             <h1>Logar</h1>
-            <label htmlFor="description">Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
                 value={user.email}
-                type="text"
+                type="email"
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
                 placeholder="Email..."
-                name="description"
-                id="description"
+                name="email"
+                id="email"
+                data-testid="email-input"
             />
-            <label htmlFor="description">Senha:</label>
+            <label htmlFor="password">Senha:</label>
             <input
                 value={user.password}
                 type="password"
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 placeholder="Senha..."
-                name="description"
-                id="description"
+                name="password"
+                id="password"
+                data-testid="password-input"
             />
-            <button> Logar </button>
+            <button data-testid="submit-button">Entrar</button>
         </form>
     );
 }
