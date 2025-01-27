@@ -38,7 +38,7 @@ export default function Chat({ socket }) {
     // Sempre que a lista de mensagem for atualizada a função scrollDown() é chamada para rolar o chat até o final.
     const scrollDown = () => {
         if (bottomRef.current) {
-            bottomRef.current.scrollIntoView({ behavior: "smooth" });
+            bottomRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         }
     };
     // Função que rola o chat até o final, sempre que a lista de mensagens for atualizada.
