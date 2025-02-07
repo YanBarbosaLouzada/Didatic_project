@@ -1,5 +1,5 @@
-import React from "react";
-import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
+import { React, act } from "react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import axios from "axios";
 import "@testing-library/jest-dom/extend-expect";
 import { setupServer } from "msw/node";
@@ -31,13 +31,9 @@ const pokemonsToSee = pokemonsListMockFactory([
 // Configurando o servidor de mock com MSW
 const server = setupServer(
     // Mock para listar Pokémons
-    rest.get("http://localhost:4444/pokemons", (req, res, ctx) => {
-        return res(ctx.json(pokemonsListMock));
-    }),
+    rest.get("http://localhost:4444/pokemons", (req, res, ctx) => { return res(ctx.json(pokemonsListMock)) }),
     // Mock para detalhes de um Pokémon específico
-    rest.get(
-        `https://pokeapi.co/api/v2/pokemon/${pokemonIdChoosed}`,
-        (req, res, ctx) => {
+    rest.get(`https://pokeapi.co/api/v2/pokemon/${pokemonIdChoosed}`, (req, res, ctx) => {
             const { id } = req.params;
             const pokemon = { ...pokemonGenerated, id: parseInt(id) };
             return res(ctx.json(pokemon));
@@ -47,10 +43,12 @@ const server = setupServer(
 
 // Configuração inicial e limpeza do servidor
 beforeAll(() => server.listen()); // Inicia o servidor antes de todos os testes
+
 afterEach(() => {
     server.resetHandlers(); // Reseta handlers para evitar conflitos entre testes
     jest.clearAllMocks(); // Limpa mocks para garantir isolamento dos testes
 });
+
 afterAll(() => server.close()); // Fecha o servidor após todos os testes
 
 // Teste para verificar se a lista de Pokémons é renderizada corretamente
@@ -66,11 +64,7 @@ test("Checando se a lista de Pokémons está correta", async () => {
     debug();
 
     // Esperando até que o primeiro Pokémon seja renderizado
-    await waitFor(() => {
-        expect(
-            screen.getByTestId(`pokemon-${pokemonGenerated.id}`)
-        ).toBeInTheDocument();
-    });
+    await waitFor(() => {expect(screen.getByTestId(`pokemon-${pokemonGenerated.id}`)).toBeInTheDocument()});
 
     // Verificando se o texto "Loading..." desapareceu
     expect(screen.queryByText(/Loading.../i)).not.toBeInTheDocument();
@@ -94,42 +88,26 @@ test("Abre modal com detalhes do Pokémon ao clicar", async () => {
     expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
 
     // Aguardando até que a lista de Pokémons seja carregada
-    await waitFor(() => {
-        expect(screen.getByTestId(`pokemon-${pokemonGenerated.id}`)).toBeInTheDocument();
-    });
+    await waitFor(() => {expect(screen.getByTestId(`pokemon-${pokemonGenerated.id}`)).toBeInTheDocument();});
 
     // Mockando a resposta para os detalhes de um Pokémon específico ao clicar
     axios.get.mockResolvedValueOnce({ data: pokemonGenerated });
 
     // Obtendo o elemento do Pokémon e simulando um clique para abrir o modal
     const pokemonElement = screen.getByTestId(`pokemon-${pokemonGenerated.id}-name`);
-    await act(async () => {
-        fireEvent.click(pokemonElement);
-    });
+    await act(async () => {fireEvent.click(pokemonElement);});
 
     // Aguardando até que o modal seja exibido
-    await waitFor(() => {
-        expect(screen.getByTestId("modal-pokemon")).toBeInTheDocument();
-    });
+    await waitFor(() => {expect(screen.getByTestId("modal-pokemon")).toBeInTheDocument();});
 
     // Validando que o modal contém as informações corretas
-    expect(
-        screen.getByTestId(`pokemon-chosed-${pokemonGenerated.id}`)
-    ).toBeInTheDocument();
-    expect(
-        screen.getByText(pokemonGenerated.types[0].type.name)
-    ).toBeInTheDocument();
-    expect(
-        screen.getByText(pokemonGenerated.types[1].type.name)
-    ).toBeInTheDocument();
+    expect(screen.getByTestId(`pokemon-chosed-${pokemonGenerated.id}`)).toBeInTheDocument();
+    expect(screen.getByText(pokemonGenerated.types[0].type.name)).toBeInTheDocument();
+    expect(screen.getByText(pokemonGenerated.types[1].type.name)).toBeInTheDocument();
 
     // Simulando o clique para fechar o modal
-    await act(async () => {
-        fireEvent.click(screen.getByTestId("button-close-modal"));
-    });
+    await act(async () => {fireEvent.click(screen.getByTestId("button-close-modal"));});
 
     // Verificando se o modal foi fechado corretamente
-    await waitFor(() => {
-        expect(screen.queryByTestId("modal-pokemon")).not.toBeInTheDocument();
-    });
+    await waitFor(() => {expect(screen.queryByTestId("modal-pokemon")).not.toBeInTheDocument();});
 });

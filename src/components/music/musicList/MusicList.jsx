@@ -4,7 +4,7 @@ import './MusicList.css';
 
 function MusicList({ musicas, setEditMode, deleteMusica }) {
     return (
-        <div id="musicas-list">
+        <div data-testid="music-list" id="musicas-list">
             {musicas.map((musica) => (
                 <MusicCard
                     musica={musica}

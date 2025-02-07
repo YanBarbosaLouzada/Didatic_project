@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./PokemonList.css";
 import { useState } from "react";
-
+import React from "react";
 
 import { PokemonModal } from "../pokemonModal/PokemonModal.jsx";
 import UsePokemonStore from "../../../store/UsePokemonStore.jsx";   
@@ -14,8 +14,12 @@ const PokemonList = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const { selectedPokemons, togglePokemon } = UsePokemonStore();
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (loading) {
+        return <div>Loading...</div>;
+    } 
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     const extractIdFromUrl = (url) => {
         const urlParts = url.split("/");

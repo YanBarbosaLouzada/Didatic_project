@@ -3,7 +3,9 @@ import './PokemonModal.css';
 import { AiFillCloseCircle } from "react-icons/ai";
 
 export const PokemonModal = ({ pokemon, onClose }) => {
-    if (!pokemon) return null;
+    if (!pokemon) {
+        return null;
+    }
 
     return (
         <div className="modal-background" data-testid="modal-pokemon">

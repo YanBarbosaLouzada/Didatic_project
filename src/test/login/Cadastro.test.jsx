@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { act} from "react";
 import "@testing-library/jest-dom/extend-expect";
+
 import RegisterForm from "../../components/authComponents/Register";
 
 describe("Componente Register", () => {

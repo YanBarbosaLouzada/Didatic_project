@@ -1,12 +1,15 @@
-import React from "react";
+import  React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { act } from "react"; // Corrigido
+import { act } from 'react'
+
+
 import io from "socket.io-client";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { Server } from "socket.io";
 import { createServer } from "http";
+
 import Chat from "../../components/chat/Chat.jsx";
 
 
@@ -47,21 +50,12 @@ describe("Chat Component", () => {
     it("should handle axios and socket.io communication", async () => {
         mock.onGet("/api/some-endpoint").reply(200, { data: "some data" });
 
-        // Renderizar componente com act
-        await act(async () => {
-            render(<Chat socket={socket} />);
-        });
+        render(<Chat socket={socket} />);
 
-        // Simular interações
-        await act(async () => {
-            fireEvent.change(screen.getByPlaceholderText("Mensagem"), {
-                target: { value: "Hello, World!" },
-            });
-            fireEvent.click(screen.getByText("Enviar Mensagem"));
+        fireEvent.change(screen.getByPlaceholderText("Mensagem"), {
+            target: { value: "Hello, World!" },
         });
-
-        // Adicionar verificações aqui
+        fireEvent.click(screen.getByText("Enviar Mensagem"));
     });
-
 });
 
