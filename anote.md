@@ -1,1 +1,3 @@
-npm i -D @babel/preset-env @babel/preset-react babel-jest babel-plugin-transform-import-meta identity-obj-proxy
+Usuário e Senha para entrar como admin e liberar a pagina de musica.
+Email:    admin@example.com
+Senha:    adminSenha

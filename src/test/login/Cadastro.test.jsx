@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { act} from "react";
+import { act } from "react";
 import "@testing-library/jest-dom/extend-expect";
 
 import RegisterForm from "../../components/authComponents/Register";
@@ -9,7 +9,7 @@ describe("Componente Register", () => {
     test("renderiza o formulário de registro", () => {
         render(<RegisterForm onSubmitForm={jest.fn()} />);
 
-        expect(screen.getByText("Criar usuário")).toBeInTheDocument();
+        expect(screen.getByText("Criar usuário:")).toBeInTheDocument();
         expect(screen.getByTestId("name-input")).toBeInTheDocument();
         expect(screen.getByTestId("email-input")).toBeInTheDocument();
         expect(screen.getByTestId("idade-input")).toBeInTheDocument();

@@ -73,7 +73,7 @@ function RegisterForm(props) {
 
     return (
         <form onSubmit={handleSubmit} className={"form"}>
-            <h1>Criar usuário</h1>
+            <h1>Criar usuário:</h1>
             <label htmlFor="name">Nome</label>
             <input
                 type="text"

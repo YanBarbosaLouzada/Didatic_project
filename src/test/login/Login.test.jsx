@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent} from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from 'react'
 import "@testing-library/jest-dom/extend-expect";
 
@@ -9,7 +9,7 @@ describe("Componente LoginForm", () => {
     test("renderiza o formulário de login com campos de email e senha e um botão de envio", () => {
         render(<LoginForm onSubmitForm={jest.fn()} />);
 
-        expect(screen.getByText("Logar")).toBeInTheDocument();
+        expect(screen.getByText("Entrar:")).toBeInTheDocument();
         expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Senha/i)).toBeInTheDocument();
         expect(screen.getByTestId("submit-button")).toBeInTheDocument();

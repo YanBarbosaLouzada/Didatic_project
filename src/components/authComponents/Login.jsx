@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import "./Form.css";
+import { useNavigate } from "react-router-dom";
 function LoginForm(props) {
+    const navigate = useNavigate()
+
     const [user, setUser] = useState({
         email: "",
         password: "",
     });
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!user.email.trim() || !user.password.trim()) {
+            alert("Credenciais estão faltando. Preencha todos os campos.");
+            return;
+        }
         props.onSubmitForm(user);
+        navigate("/")
     };
     return (
         <form onSubmit={handleSubmit} className={"form"}>
-            <h1>Logar</h1>
+            <h1>Entrar:</h1>
             <label htmlFor="email">Email:</label>
             <input
                 value={user.email}
