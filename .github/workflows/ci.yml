@@ -23,11 +23,11 @@ jobs:
       # dentro da pasta frontend e rodaremos o npm install
       - name: Install dependencies
         run: |
-          cd frontend
+          cd Web_Intermediary_Frontend
           npm install
       # para finalizar  iremos agora testar todos os projetos e verificar se
       # existe algum erro
       - name: Run frontend tests
         run: |
-          cd frontend
+          cd Web_Intermediary_Frontend
           npm test
