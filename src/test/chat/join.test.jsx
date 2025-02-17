@@ -1,11 +1,10 @@
 import React from "react";
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Join from "../../components/join/Join.jsx";
 
-
 describe("Join Component", () => {
-    it("Deve simular uma pessoa escrevendo o seu nome e clicando no botão de entrar", () => {
+    it("Deve permitir escrever o nome e entrar no chat", () => {
         const setChatVisibility = jest.fn();
         const setSocket = jest.fn();
 
@@ -17,20 +16,12 @@ describe("Join Component", () => {
         const button = screen.getByText("Entrar");
         fireEvent.click(button);
 
-        // Verifica se o input realmente recebeu o valor digitado
         expect(input.value).toBe("TestUser");
-
-        // Obtém a referência do `useRef` (acessando diretamente o input)
-        const usernameRefValue = input.value;
-
-        // Verifica se `usernameRef.current.value` foi atualizado corretamente
-        expect(usernameRefValue).toBe("TestUser");
-
         expect(setChatVisibility).toHaveBeenCalledWith(true);
         expect(setSocket).toHaveBeenCalled();
     });
 
-    it("Não deve permitir entrar no chat com nome vazio ou espaços", async () => {
+    it("Não deve permitir entrar no chat com nome vazio ou apenas espaços", () => {
         const setChatVisibility = jest.fn();
         const setSocket = jest.fn();
 
@@ -40,22 +31,16 @@ describe("Join Component", () => {
         const button = screen.getByText("Entrar");
 
         // Caso 1: Nome vazio
-        await act(async () => {
-            fireEvent.change(input, { target: { value: "" } });
-            fireEvent.click(button);
-        });
+        fireEvent.change(input, { target: { value: "" } });
+        fireEvent.click(button);
 
-        // Certifica-se de que `setChatVisibility` e `setSocket` não foram chamados
         expect(setChatVisibility).not.toHaveBeenCalled();
         expect(setSocket).not.toHaveBeenCalled();
 
         // Caso 2: Nome apenas com espaços
-        await act(async () => {
-            fireEvent.change(input, { target: { value: "   " } });
-            fireEvent.click(button);
-        });
+        fireEvent.change(input, { target: { value: "   " } });
+        fireEvent.click(button);
 
-        // Ainda não deve permitir entrar no chat
         expect(setChatVisibility).not.toHaveBeenCalled();
         expect(setSocket).not.toHaveBeenCalled();
     });

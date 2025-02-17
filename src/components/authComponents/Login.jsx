@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./Form.css";
-import { useNavigate } from "react-router-dom";
 function LoginForm(props) {
-    const navigate = useNavigate()
 
     const [user, setUser] = useState({
         email: "",
@@ -15,7 +13,6 @@ function LoginForm(props) {
             return;
         }
         props.onSubmitForm(user);
-        navigate("/")
     };
     return (
         <form onSubmit={handleSubmit} className={"form"}>

@@ -23,7 +23,7 @@ describe("MusicList Component", () => {
         // Verifica se o container principal existe
         const musicList = screen.getByTestId("music-list");
         expect(musicList).toBeInTheDocument();
-        expect(musicList.children).toHaveLength(musicas.length); // Verifica o número de músicas renderizadas
+        expect(Array.from(musicList.children)).toHaveLength(musicas.length);
 
         // Verifica cada música individualmente
         musicas.forEach((musica) => {
@@ -39,13 +39,18 @@ describe("MusicList Component", () => {
             const generoElement = screen.getByTestId(`music-genero-${musica.id}`);
             expect(generoElement).toHaveTextContent(`Gênero: ${musica.genero}`);
 
-            // Simula o clique no botão de edição e verifica se a função foi chamada corretamente
+            // Verifica se o ícone de edição e de deletar estão presentes
             const editIcon = screen.getByTestId(`edit-icon-${musica.id}`);
+            expect(editIcon).toBeInTheDocument();
+
+            const deleteIcon = screen.getByTestId(`delete-icon-${musica.id}`);
+            expect(deleteIcon).toBeInTheDocument();
+
+            // Simula o clique no botão de edição e verifica se a função foi chamada corretamente
             fireEvent.click(editIcon);
             expect(setEditMode).toHaveBeenCalledWith(musica);
 
             // Simula o clique no botão de deletar e verifica se a função foi chamada corretamente
-            const deleteIcon = screen.getByTestId(`delete-icon-${musica.id}`);
             fireEvent.click(deleteIcon);
             expect(deleteMusica).toHaveBeenCalledWith(musica.id);
         });
