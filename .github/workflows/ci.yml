@@ -6,28 +6,21 @@ on: [push, pull_request]
 jobs:
   # nome da primeira tarefa
   test-frontend:
-    #sistema operacional que será usado  na imagem, no nosso caso
-    # será utilizado o linux ubuntu na ultima versão
+    # sistema operacional que será usado na imagem
     runs-on: ubuntu-latest
     # passo a passo do nosso projeto
     steps:
-      # dar pull na maquina do nosso código
+      # dar pull na máquina do nosso código
       - name: Checkout code
         uses: actions/checkout@v2
-      # instalar o nodejs na versão que estamos utilizando dentro da maquina
+      # instalar o Node.js na versão correta
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "21.7.0"
-      # agora vamos rodar o comando npm install do projeto para isto entraremos
-      # dentro da pasta frontend e rodaremos o npm install
+      # instalar as dependências
       - name: Install dependencies
-        run: |
-          cd ../../
-          npm install
-      # para finalizar  iremos agora testar todos os projetos e verificar se
-      # existe algum erro
+        run: npm install
+      # rodar os testes
       - name: Run frontend tests
-        run: |
-          cd ../../
-          npm test
+        run: npm test
