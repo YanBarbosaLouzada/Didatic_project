@@ -1,0 +1,33 @@
+# nome do processo
+name: CI
+# métodos que iremos checar
+on: [push, pull_request]
+# tarefas a serem feitas
+jobs:
+  # nome da primeira tarefa
+  test-frontend:
+    #sistema operacional que será usado  na imagem, no nosso caso
+    # será utilizado o linux ubuntu na ultima versão
+    runs-on: ubuntu-latest
+    # passo a passo do nosso projeto
+    steps:
+      # dar pull na maquina do nosso código
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # instalar o nodejs na versão que estamos utilizando dentro da maquina
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "21.7.0"
+      # agora vamos rodar o comando npm install do projeto para isto entraremos
+      # dentro da pasta frontend e rodaremos o npm install
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+      # para finalizar  iremos agora testar todos os projetos e verificar se
+      # existe algum erro
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm test
