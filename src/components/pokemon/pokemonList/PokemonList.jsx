@@ -81,7 +81,8 @@ const PokemonList = () => {
                                     </td>
                                 </tr>
                             );
-                        })}
+                        })
+                    }
                 </tbody>
             </table>
 
@@ -91,7 +92,7 @@ const PokemonList = () => {
                     onClose={() => setModalVisible(false)}
                 />
             )}
-                
+
         </div>
     );
 };

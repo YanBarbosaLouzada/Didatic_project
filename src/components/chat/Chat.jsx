@@ -29,7 +29,7 @@ export default function Chat({ socket }) {
         scrollDown();
     }, [messageList]);
 
-
+    // função responsavel por mudar o valor da variavel(useState) showModal
     const mudarModal = () => {
         setShowModal(!showModal);
     }
@@ -57,6 +57,7 @@ export default function Chat({ socket }) {
         }
     };
 
+
     // Função que coloca o foco no campo de texto, quando o componente é montado.
 
     const getEnterKey = (e) => {
@@ -74,13 +75,20 @@ export default function Chat({ socket }) {
 
         if (!newMessage.trim()) return; // Se a mensagem estiver vazia, não faz nada
 
-        const messageData = { text: newMessage, type: "text" } 
+        const messageData = { text: newMessage, type: "text" }
 
         socket.emit("message", messageData); // Envia a mensagem pelo socket
         clearInput(); // Limpa o campo de texto
         focusInput(); // Retorna o foco para o campo
     };
-    // Função que envia a mensagem, quando o botão de enviar é clicado.
+
+    // 1️⃣ Usuário abre o modal(PokemonCard) no Chat.
+    // 2️⃣ Ele vê os Pokémon armazenados(selectedPokemons).
+    // 3️⃣ Clica no botão de envio(TbSend2), que chama handleSendPokemon(pokemon).
+    // 4️⃣ handleSendPokemon busca detalhes do Pokémon na PokéAPI e, quando recebe a resposta, chama sendPokemonMessage.
+    // 5️⃣ sendPokemonMessage do Chat envia os dados do Pokémon via socket para o servidor.
+    // 6️⃣ O modal fecha(onClose()).
+    // 7️⃣ A mensagem aparece no chat.
 
     const sendPokemonMessage = (pokemon) => {
         const messageData = {
@@ -90,16 +98,18 @@ export default function Chat({ socket }) {
             authorId: socket.id,
         }
         socket.emit("message", messageData);
+        console.log(messageData)
         setShowModal(false)
     }
 
     return (
         <div className="chat-container">
-            {showModal ? (
+            {showModal === true ? (
                 <PokemonCard
                     onClose={() => mudarModal()}
                     sendPokemonMessage={sendPokemonMessage}
-                />
+                >
+                </PokemonCard>
             ) : null}
             <div className="chat-box">
                 <div className="chat-header">Bate Papo</div>
