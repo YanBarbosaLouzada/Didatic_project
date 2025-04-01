@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 
 import RegisterForm from "../../components/authComponents/Register";
 
-describe("Componente Register", () => {
+describe("Componente Register", () => { 
     test("renderiza o formulário de registro", () => {
         render(<RegisterForm onSubmitForm={jest.fn()} />);
 
