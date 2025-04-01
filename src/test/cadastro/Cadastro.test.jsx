@@ -26,6 +26,7 @@ describe("Componente Register", () => {
         const passwordInput = screen.getByTestId("password-input");
         const confirmPasswordInput = screen.getByTestId("confirmPassword-input");
 
+        //Simulando que uma pessoa esta preenchendo o formulario
         fireEvent.change(nameInput, { target: { value: "John Doe" } });
         fireEvent.change(emailInput, { target: { value: "test@example.com" } });
         fireEvent.change(idadeInput, { target: { value: "30" } });
@@ -34,7 +35,7 @@ describe("Componente Register", () => {
 
         expect(nameInput.value).toBe("John Doe");
         expect(emailInput.value).toBe("test@example.com");
-        expect(idadeInput.value).toBe("30"); // Importante verificar como a idade está armazenada
+        expect(idadeInput.value).toBe("30");
         expect(passwordInput.value).toBe("password123!");
         expect(confirmPasswordInput.value).toBe("password123!");
     });
@@ -64,8 +65,7 @@ describe("Componente Register", () => {
     test("mostra mensagem de erro para nome inválido", () => {
         render(<RegisterForm onSubmitForm={jest.fn()} />);
 
-        const nameInput = screen.getByTestId("name-input");
-        fireEvent.change(nameInput, { target: { value: "Jo" } }); 
+        fireEvent.change(screen.getByTestId("name-input"), { target: { value: "Jo" } }); 
         fireEvent.click(screen.getByTestId("submit-button"));
 
         expect(screen.getByTestId("error-name")).toHaveTextContent(

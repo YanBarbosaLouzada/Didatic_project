@@ -41,8 +41,8 @@ export default function Chat({ socket }) {
             bottomRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         }
     };
+    
     // Função que rola o chat até o final, sempre que a lista de mensagens for atualizada.
-
     const clearInput = () => {
         if (messageRef.current) {
             messageRef.current.value = "";
