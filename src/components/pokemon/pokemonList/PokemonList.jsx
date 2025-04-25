@@ -50,7 +50,7 @@ const PokemonList = () => {
                         <th>Selecionar</th>
                     </tr>
                 </thead>
-                <tbody data-testid="pokemons-list">
+                <tbody data-testid="pokemon-list">
                     {pokemons &&
                         pokemons.length > 0 &&
                         pokemons.map((pokemon) => {
